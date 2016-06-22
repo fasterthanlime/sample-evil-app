@@ -39,5 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         say(`could not steal token (${e})`)
       }
     }
+  } else {
+    say('itch data path protected and/or non-existent')
   }
 })
