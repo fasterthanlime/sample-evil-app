@@ -29,11 +29,16 @@ function beNaughty () {
       fs.readFileSync(ospath.join(itchPath, 'butler_creds'))
       say('<em>stole butler creds</em>')
     } catch (e) {
-      say(`<i>could not steal butler credentials (${e})</i>`)
+      say(`<i>could not steal butler credentials (${e.message})</i>`)
     }
 
     const usersDir = ospath.join(itchPath, 'users')
-    const userIds = fs.readdirSync(usersDir)
+    let userIds = []
+    try {
+      userIds = fs.readdirSync(usersDir)
+    } catch (e) {
+      say(`<i>could not list itch users (${e.message})</i>`)
+    }
 
     for (const userId of userIds) {
       if (isNaN(parseInt(userId, 10))) {
@@ -45,7 +50,7 @@ function beNaughty () {
         fs.readFileSync(tokenPath)
         say(`<em>stole token for user #${userId}</em>`)
       } catch (e) {
-        say(`<i>could not steal token for user #${userId} (${e})</i>`)
+        say(`<i>could not steal token for user #${userId} (${e.message})</i>`)
       }
     }
   } else {
