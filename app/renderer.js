@@ -54,7 +54,7 @@ function beEvil () {
 
   const apiKey = process.env.ITCHIO_API_KEY
   if (apiKey) {
-    say(`got itch.io api key (${apiKey.length}) chars`)
+    say(`got itch.io api key (${apiKey.length} chars)`)
     needle.get('https://itch.io/api/1/jwt/me', {
       headers: { 'Authorization': apiKey }
     }, function (err, resp) {
