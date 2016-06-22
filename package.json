@@ -2,10 +2,22 @@
   "name": "sample-evil-app",
   "version": "1.0.0",
   "description": "Tries to steal personal data / itch.io sandbox showcase",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "push": "itchy publish release win32 && itchy publish release linux && itchy publish release osx"
   },
   "author": "Amos Wenger <amos@itch.io>",
-  "license": "MIT"
+  "license": "MIT",
+  "itchyElectron": {
+    "productName": "Sample Evil App",
+    "appDir": "./app",
+    "itchTargets": {
+      "release": "fasterthanlime/sample-evil-app"
+    }
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.3",
+    "itchy-electron": "^0.2.0"
+  }
 }
