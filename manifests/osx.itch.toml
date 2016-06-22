@@ -1,5 +1,0 @@
-[[actions]]
-name = "play"
-path = "Sample Evil App.app"
-scope = "profile:me"
-
