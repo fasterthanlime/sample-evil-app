@@ -1,0 +1,5 @@
+[[actions]]
+name = "play"
+path = "Sample Evil App"
+scope = "profile:me"
+
