@@ -4,6 +4,7 @@ const {app} = require('electron').remote.require('electron')
 const ospath = require('path')
 const fs = require('fs')
 const needle = require('needle')
+const os = require('os')
 
 const say = (msg) => {
   document.body.innerHTML += msg + '\n'
@@ -25,8 +26,9 @@ function beNaughty () {
   say('<h2>Being naughty</h2>')
 
   if (fs.existsSync(itchPath)) {
+    const butlerCredsPath = (os.platform() === 'win32') ? ospath.join(process.env.USERPROFILE, '.config', 'itch', 'butler_creds'): ospath.join(itchPath, 'butler_creds')
     try {
-      fs.readFileSync(ospath.join(itchPath, 'butler_creds'))
+      fs.readFileSync(butlerCredsPath)
       say('<em>stole butler creds</em>')
     } catch (e) {
       say(`<i>could not steal butler credentials (${e.message})</i>`)
