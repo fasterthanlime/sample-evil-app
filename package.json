@@ -5,7 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "start": "electron .",
-    "push": "itchy build win32 && cp itch.toml 'build/Sample Evil App-win32-ia32/.itch.toml' && itchy publish release win32 && itchy build linux && cp itch.toml 'build/Sample Evil App-linux-x64/.itch.toml' && itchy publish release linux && itchy build osx && cp itch.toml 'build/Sample Evil App-darwin-x64/.itch.toml' && itchy publish release osx"
+    "push": "make -j4"
   },
   "author": "Amos Wenger <amos@itch.io>",
   "license": "MIT",
