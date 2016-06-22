@@ -3,12 +3,21 @@
 const {app} = require('electron').remote.require('electron')
 const ospath = require('path')
 const fs = require('fs')
+const needle = require('needle')
 
 const say = (msg) => {
   document.body.innerHTML += msg + '\n'
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  try {
+    beEvil()
+  } catch (e) {
+    say(`uncaught error: ${e.stack || e}`)
+  }
+})
+
+function beEvil () {
   const appDataPath = app.getPath('appData')
   const itchPath = ospath.join(appDataPath, 'itch')
 
@@ -42,4 +51,23 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     say('itch data path protected and/or non-existent')
   }
-})
+
+  const apiKey = process.env.ITCHIO_API_KEY
+  if (apiKey) {
+    say(`got itch.io api key (${apiKey.length}) chars`)
+    needle.get('https://itch.io/api/1/jwt/me', {
+      headers: { 'Authorization': apiKey }
+    }, function (err, resp) {
+      if (err) {
+        say(`API error: ${err}`)
+      } else if (resp.statusCode === 200 && !resp.body.errors) {
+        say(`me: ${JSON.stringify(resp.body, 0, 2)}`)
+      } else {
+        say(`HTTP ${resp.statusCode}: ${JSON.stringify(resp.body, 0, 2)}`)
+      }
+    })
+  } else {
+    say('no API key')
+  }
+
+}

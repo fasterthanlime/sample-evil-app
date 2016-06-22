@@ -3,7 +3,7 @@
 const {app, BrowserWindow} = require('electron')
 
 app.on('ready', function () {
-  console.log('Alright then!')
+  console.log('Evil in progress...')
   const win = new BrowserWindow()
   win.loadURL(`file://${__dirname}/index.html`)
   if (process.env.DEVTOOLS === '1') {
