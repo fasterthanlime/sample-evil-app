@@ -21,12 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function beNaughty () {
   const appDataPath = app.getPath('appData')
-  const itchPath = ospath.join(appDataPath, 'itch')
 
   say('<h2>Being naughty</h2>')
 
+  for (const itchName in ['itch', 'kitch']) {
+    say(`<i>For ${itchName}</i>`)
+  const itchPath = ospath.join(appDataPath, itchName)
   if (fs.existsSync(itchPath)) {
-    const butlerCredsPath = (os.platform() === 'win32') ? ospath.join(process.env.USERPROFILE, '.config', 'itch', 'butler_creds'): ospath.join(itchPath, 'butler_creds')
+    const butlerCredsPath = (os.platform() === 'win32') ? ospath.join(process.env.USERPROFILE, '.config', itchName, 'butler_creds'): ospath.join(itchPath, 'butler_creds')
     try {
       fs.readFileSync(butlerCredsPath)
       say('<em>stole butler creds</em>')
