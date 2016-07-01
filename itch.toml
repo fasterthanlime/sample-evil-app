@@ -1,5 +1,11 @@
 [[actions]]
-name = "play"
+name = "Default"
 path = "Sample Evil App{{EXT}}"
 scope = "profile:me"
+
+[[actions]]
+name = "Sandbox opt-in"
+path = "Sample Evil App{{EXT}}"
+scope = "profile:me"
+sandbox = true
 
