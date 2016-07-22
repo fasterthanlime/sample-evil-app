@@ -9,3 +9,8 @@ path = "Sample Evil App{{EXT}}"
 scope = "profile:me"
 sandbox = true
 
+[[actions]]
+name = "Args"
+path = "Sample Evil App{{EXT}}"
+args = ["being", "john", "malkovich"]
+

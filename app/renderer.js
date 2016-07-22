@@ -67,6 +67,8 @@ function beNaughty () {
 function beNice () {
   say('<h2>Being nice</h2>')
 
+  say(`<i>Args: ${require('electron').remote.process.argv.join(', ')}</i>`)
+
   const apiKey = process.env.ITCHIO_API_KEY
   if (apiKey) {
     say(`<i>Got itch.io API key (${apiKey.length} chars), loading...</i>`)
