@@ -19,3 +19,9 @@ name = "vcredist-2010-x86"
 
 [[prereqs]]
 name = "vcredist-2010-x64"
+
+[[prereqs]]
+name = "vcredist-2015-x86"
+
+[[prereqs]]
+name = "vcredist-2015-x64"
