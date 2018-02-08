@@ -1,6 +1,7 @@
 'use strict'
 
 const {app} = require('electron').remote.require('electron')
+const cp = require("electron").remote.require("child_process");
 const ospath = require('path')
 const fs = require('fs')
 const needle = require('needle')
@@ -12,12 +13,58 @@ const say = (msg) => {
 
 document.addEventListener('DOMContentLoaded', function () {
   try {
-    beNaughty()
-    beNice()
+    try {
+      const whoamiPath = process.platform === "win32" ? `C:\\Windows\\system32\\whoami.exe` : "whoami";
+      const me = cp.execSync(whoamiPath);
+      say(`<i>Running as ${me}</i>`)
+    } catch (e) {
+      say(`<em>Could not call whoami: ${e}</em>`)
+    }
+
+    utilities();
+    beNice();
+    beNaughty();
   } catch (e) {
     say(`uncaught error: ${e.stack || e}`)
   }
 })
+
+function doLaunch() {
+  cp.spawn("notepad.exe", [], { detached: true, });
+}
+
+function doLaunchAndQuit() {
+  cp.spawn("notepad.exe", [], { detached: true, });
+  app.quit();
+}
+
+function utilities() {
+  say('<h2>Utilities</h2>')
+
+  say(`<button onclick="doLaunch()">Launch notepad.exe (detached)</button>`);
+  say(`<button onclick="doLaunchAndQuit()">Launch notepad.exe (detached) and quit</button>`);
+
+  // ----
+
+  const paths = {};
+  let table = `<table>`;
+
+  for (const name of "home appData temp desktop documents".split(" ")) {
+    table += `<tr><td>${name}</td><td>${app.getPath(name)}</td></tr>`
+  }
+  table += `</table>`
+  say(table)
+
+  // ----
+
+  let envTable = `<table>`;
+  for (const k of Object.keys(process.env)) {
+    envTable += `<tr><td>${k}</td><td>${process.env[k]}</td></tr>`;
+  }
+  envTable += `</table>`;
+
+  say(`<details><summary>Environment</summary>${envTable}</details>`)
+}
 
 function beNaughty () {
   const appDataPath = app.getPath('appData')

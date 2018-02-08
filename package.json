@@ -19,5 +19,8 @@
   "devDependencies": {
     "electron": "^1.6.2",
     "itchy-electron": "^0.2.1"
+  },
+  "dependencies": {
+    "needle": "^2.1.1"
   }
 }
