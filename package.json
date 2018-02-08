@@ -1,6 +1,6 @@
 {
   "name": "sample-evil-app",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Tries to steal personal data / itch.io sandbox showcase",
   "main": "app/index.js",
   "scripts": {
